@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jimmy’s Craft Creations | Professional Technical Services</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --grad-main: linear-gradient(135deg,#3b9feb,#f8cdda);
+  --grad-accent: linear-gradient(90deg,#F8EFEA,#096983);
+  --grad-alt: linear-gradient(135deg,#00c6ff,#0072ff);
+}
+
+*{box-sizing:border-box}
+body{ margin:0; font-family:'Poppins',sans-serif; background:#DED369; color:#222; scroll-behavior:smooth; overflow-x: hidden; }
+
+/* NAVIGATION */
+nav{ position:sticky; top:0; z-index:100; background:var(--grad-alt); color:#fff; padding:10px 40px; display:flex; justify-content:space-between; align-items:center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+nav a{ color:white; text-decoration:none; margin-left:20px; font-weight:500; cursor: pointer; }
+
+/* HERO */
+.hero{ position: relative; min-height:60vh; color:white; display:flex; align-items:center; justify-content:center; text-align:center; overflow: hidden; }
+.slideshow-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.5s; background-size: cover; background-position: center; }
+.slide.active { opacity: 1; }
+.slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); }
+.hero-content { position: relative; z-index: 10; padding: 20px; }
+
+/* ABOUT SECTION */
+.about-section { padding: 80px 40px; background: white; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 40px; scroll-margin-top: 80px; }
+.about-image { flex: 1; min-width: 300px; max-width: 500px; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.about-image img { width: 100%; height: auto; display: block; }
+.about-text { flex: 1.2; min-width: 300px; max-width: 650px; }
+.about-text h2 { color: #096983; font-size: 2.2rem; margin-bottom: 20px; position: relative; }
+.about-text h2::after { content: ''; display: block; width: 60px; height: 4px; background: #0072ff; margin-top: 10px; border-radius: 2px; }
+.about-text p { line-height: 1.8; color: #444; font-size: 1.05rem; margin-bottom: 20px; }
+
+/* VIDEO SECTION (LINK UPDATED) */
+.video-section { padding: 60px 20px; background: #fdfdfd; text-align: center; }
+.video-container { max-width: 500px; margin: 0 auto; border-radius: 25px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.2); background: #000; cursor: pointer; transition: 0.3s; }
+.video-container:hover { transform: scale(1.02); }
+.video-container img { width: 100%; display: block; opacity: 0.8; }
+
+/* SERVICES GRID */
+section{ padding:60px 40px; scroll-margin-top: 80px; }
+.category-header { max-width:1300px; margin: 50px auto 20px; border-left: 8px solid #0072ff; padding-left: 15px; font-size: 1.8rem; color: #111; text-transform: uppercase; }
+.services-grid{ max-width:1300px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; margin-bottom: 40px; }
+.service-card{ background:white; border-radius:20px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.1); transition:.4s; cursor:pointer; }
+.service-card:hover{ transform:translateY(-8px); }
+.service-card img{ width:100%; height:200px; object-fit:cover; }
+.service-card div{ padding:20px; }
+.service-card h3{ margin: 0; font-size: 1.1rem; color: #096983; }
+
+/* GALLERY SECTION */
+.gallery-section { padding: 80px 40px; background: #fff; text-align: center; }
+.gallery-container { 
+  max-width: 1300px; 
+  margin: 0 auto; 
+  display: flex; 
+  overflow-x: auto; 
+  gap: 20px; 
+  padding: 20px 10px 40px;
+  scrollbar-width: thin;
+  scrollbar-color: #0072ff #f0f0f0;
+}
+.gallery-container::-webkit-scrollbar { height: 8px; }
+.gallery-container::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 10px; }
+.gallery-container::-webkit-scrollbar-thumb { background: #0072ff; border-radius: 10px; }
+.gallery-item { 
+  min-width: 320px; 
+  height: 450px; 
+  position: relative; 
+  border-radius: 25px; 
+  overflow: hidden; 
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.gallery-item:hover img { transform: scale(1.1); }
+.gallery-overlay { 
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  background: linear-gradient(transparent, rgba(0,0,0,0.9)); 
+  color: white; 
+  padding: 25px; 
+  text-align: left; 
+}
+.gallery-overlay h4 { margin: 0; font-size: 1.2rem; }
+.gallery-overlay p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8; }
+
+/* REVIEWS */
+.testimonials { background: #f4f4f4; padding: 80px 20px; text-align: center; }
+.testimonial-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.testimonial-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #0072ff; }
+.stars { color: #f39c12; margin-bottom: 10px; }
+
+/* CONTACT */
+.contact-section { background: white; padding: 80px 20px; text-align: center; scroll-margin-top: 80px; }
+.contact-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.contact-item { padding: 20px; transition: 0.3s; text-decoration: none; color: inherit; }
+.contact-icon { background: #f39c12; color: white; width: 60px; height: 60px; line-height: 60px; border-radius: 50%; font-size: 24px; margin: 0 auto 15px; display: block; }
+.fa-whatsapp { background-color: #25D366; }
+.fa-facebook-f { background-color: #1877F2; }
+
+/* DETAIL VIEW */
+#service-detail-view { display: none; padding: 40px 20px; background: #f4f4f4; min-height: 100vh; }
+.detail-container { max-width: 850px; margin: auto; background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+.detail-img { width: 100%; max-height: 50vh; object-fit: cover; display: block; }
+.detail-content { padding: 40px; }
+.btn{ display:inline-block; margin-top:20px; padding:12px 30px; border-radius:30px; background:var(--grad-accent); color:white; text-decoration:none; font-weight:600; cursor: pointer; border:none; }
+
+footer{ background:#000; color:white; text-align:center; padding:20px; }
+</style>
+</head>
+
+<body>
+
+<div id="main-site">
+  <nav>
+    <img src="JIM LOGO.png" width="60" height="60" alt="Logo" onclick="showMain()" style="cursor:pointer;">
+    <div>
+      <a onclick="showMain()">HOME</a>
+      <a href="#about">ABOUT</a>
+      <a href="#services">SERVICES</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="slideshow-container">
+      <div class="slide active" style="background-image: url('CAMERA.png');"></div>
+      <div class="slide" style="background-image: url('PLUMBING.jpg');"></div>
+    </div>
+    <div class="hero-content">
+      <h1>Jimmy’s Craft Creations</h1>
+      <p>Precision Engineering & Professional Craftsmanship</p>
+    </div>
+  </div>
+
+  <section id="about" class="about-section">
+    <div class="about-image">
+      <img src="JIM LOGO.png" alt="About Jimmy's Craft Creations">
+    </div>
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p>Welcome to <strong>Jimmy’s Craft Creations</strong>. Jim’s Crafty Creations (PTY) LTD is a dynamic and diversified service company built on a strong foundation of experience and growth. The company is a continuation of JimCatech Investment, which was established in 2016.</p>
+      <p>We specialize in the installation and maintenance of CCTV surveillance systems, electric fencing, intercom systems, access control, intruder alarms, and motorized gates — all designed to enhance safety and strengthen property protection.</p>
+    </div>
+  </section>
+
+  <div class="video-section">
+    <div style="margin-bottom: 30px;">
+        <h2 style="color: #096983; margin-bottom: 10px; font-size: 2rem;">See Our Craftsmanship in Action</h2>
+        <p style="color: #555; font-size: 1.1rem; max-width: 700px; margin: 0 auto; margin-bottom: 25px;">Watch how we transform spaces with precision, safety, and modern technology on our official channel.</p>
+        
+        <a href="https://youtube.com/shorts/sXx5UIrYJac?si=IurTx8AdEPuEg_xG" target="_blank" class="btn" style="background: #FF0000; padding: 15px 40px; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 10px;">
+          <i class="fab fa-youtube"></i> WATCH PROJECT VIDEO
+        </a>
+    </div>
+    <div class="video-container" onclick="window.open('https://youtube.com/shorts/sXx5UIrYJac?si=IurTx8AdEPuEg_xG', '_blank')">
+        <img src="JIM LOGO.png" alt="Watch Video on YouTube">
+        <div style="background: rgba(0,0,0,0.8); color: white; padding: 10px; font-size: 0.9rem;">
+          <i class="fas fa-play-circle"></i> Click to play on YouTube
+        </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <h2 class="category-header">Construction Services</h2>
+    <div class="services-grid">
+      <div class="service-card" onclick="openService('TILING', 'TIL.jpg','We combine technical precision with an eye for design to ensure your surfaces are as durable as they are beautiful.')">
+        <img src="TILING.jpg"><div><h3>Tiling</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Plumbing', 'PLUMBER.jpg', 'We dont believe in quick fixes that fail in six months. We adhere to the strictest building codes and use premium-grade materials to ensure your plumbing system operates silently and reliably for decades.')">
+        <img src="PLUMB.jpg"><div><h3>Plumbing</h3></div>
+      </div>
+    </div>
+
+    <h2 class="category-header">Electrical & Solar Services</h2>
+    <div class="services-grid">
+      <div class="service-card" onclick="openService('Electrical', 'ELE.jpg', 'We adhere strictly to the latest National Electrical Codes (NEC) and perform rigorous load testing on every circuit we install.')">
+        <img src="ELECTRICAL INSTALLATIONS.jpg"><div><h3>Electrical Installations</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Solar', 'SOLAR SYSTEMS.jpeg', 'Dont leave your energy future to chance. Our certified installers ensure your roof integrity is maintained and your system is optimized for the specific sun-path of your location.')">
+        <img src="SOLAR SYSTEMS.jpeg"><div><h3>Solar System Design</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Power', 'ELECTRIC.jpg', 'Our specialist diagnostic team uses advanced thermal imaging and circuit analysis to pinpoint the root cause of electrical failures.')">
+        <img src="POWER.jpg"><div><h3>Power Troubleshooting</h3></div>
+      </div>
+    </div>
+
+    <h2 class="category-header">Security & Safety Solutions</h2>
+    <div class="services-grid">
+      <div class="service-card" onclick="openService('CCTV', 'CAMERA.png', 'We specialize in the design and installation of high-definition surveillance ecosystems that provide crystal-clear evidence and remote accessibility.')">
+        <img src="SECURITY SYSTEMS INSTALLATIONS.jpg"><div><h3>CCTV Surveillance</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Intruded Alarms', 'ALAH.jpg', 'From silent panic buttons to high-decibel sirens, we build systems that work when it matters most.')">
+        <img src="ALARM.jpg"><div><h3>Intruder Alarms</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Access', 'Access control.jpg', 'Our Access Control solutions replace traditional keys with sophisticated digital credentials, giving you granular control over every door.')">
+        <img src="ACCESS.jpg"><div><h3>Access Control</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Electric Fencing', 'FENCE.png', 'Our professional electric fencing solutions provide a powerful physical and psychological barrier.')">
+        <img src="FENCE.png"><div><h3>Electric Fencing</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Gates', 'MOTOR.jpg', 'We provide systems that move silently, respond instantly, and ensure you never have to step out of your vehicle in the dark again.')">
+        <img src="MOTOR.jpg"><div><h3>Motorized Gates</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Fire Detection', 'FIRE-DETECTION.jpg', 'In a fire emergency, seconds are the difference. Our fire detection systems are engineered to provide the earliest possible warning.')">
+        <img src="FIRE-DETECTION.jpg"><div><h3>Fire Detection</h3></div>
+      </div>
+    </div>
+
+    <h2 class="category-header">Home Automation</h2>
+    <div class="services-grid">
+      <div class="service-card" onclick="openService('Smart Lighting Control', 'Lighting Control.jpg', 'Creating a smart environment where lighting responds to the users lifestyle and enhances the homes aesthetics.')">
+        <img src="SMART.jpg"><div><h3>Smart Lighting Control</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Climate Control', 'COLD.png', 'Our smart climate control solutions give you total command over your indoor environment.')">
+        <img src="AIRCON.jpg"><div><h3>Climate Control</h3></div>
+      </div>
+      <div class="service-card" onclick="openService('Integration', 'Centralized.png', 'No more switching between ten different apps; we provide a single platform that puts your entire property at your fingertips.')">
+        <img src="CENTRAL.jpg"><div><h3>Centralized Control System</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <h2 style="color: #096983; margin-bottom: 10px; font-size: 2.2rem;">Project Showcase</h2>
+    <p style="margin-bottom: 40px; color: #444; font-size: 1.1rem;">A glimpse into the quality and precision of our previous work.</p>
+    
+    <div class="gallery-container">
+      <div class="gallery-item">
+        <img src="CAMERA.png" alt="Project 1">
+        <div class="gallery-overlay">
+          <h4>CCTV INSTALLATION</h4>
+          <p>Security & Safety Solutions</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="CAM.png" alt="Project 2">
+        <div class="gallery-overlay">
+          <h4>CCTV INSTALLATION</h4>
+          <p>CCTV & Perimeter Protection</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="CONTROL.png" alt="Project 3">
+        <div class="gallery-overlay">
+          <h4>ALARM SYSTEMS</h4>
+          <p>Alarm Installation</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="FENCE.png" alt="Project 4">
+        <div class="gallery-overlay">
+          <h4>Perimeter Fencing</h4>
+          <p>Electric Security Setup</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="MOTOR.jpg" alt="Project 5">
+        <div class="gallery-overlay">
+          <h4>Automated Access</h4>
+          <p>Heavy Duty Gate Motors</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <img src="MAN.jpg" class="avatar">
+        <div class="stars">★★★★★</div>
+        <p>"l hired Jim's Crafty Creations PTY LTD to install a complete electric fence & motor gate for my property, and I couldn't be happier with the results."</p>
+        <h4>JOHN SEDIMO.</h4>
+      </div>
+      <div class="testimonial-card">
+        <img src="LADY.jpg" class="avatar">
+        <div class="stars">★★★★★</div>
+        <p>"Jim's Crafty Creations installed our CCTV system, and the entire process was seamless. They provided a free consultation and recommended the best solution."</p>
+        <h4>SILVIA SEGONE.</h4>
+      </div>
+      <div class="testimonial-card">
+        <img src="MAN.jpg" class="avatar">
+        <div class="stars">★★★★★</div>
+        <p>"I've worked with many contractors over the years, but Jim's Crafty Creations PTY LTD really stands out. Their attention to detail was impressive."</p>
+        <h4>ABEL S.</h4>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-container">
+        <a href="tel:+26777432321" class="contact-item"><i class="fas fa-phone contact-icon"></i><h3>Call</h3><p>+267 77432321</p></a>
+        <a href="https://wa.me/26777432321" class="contact-item"><i class="fab fa-whatsapp contact-icon"></i><h3>WhatsApp</h3><p>+267 77432321</p></a>
+        <a href="https://www.facebook.com/search/top?q=Jims%27s%20Crafty%20Creations%20PtyLtd" class="contact-item"><i class="fab fa-facebook-f contact-icon"></i><h3>Facebook</h3><p>Jims's Crafty Creations</p></a>
+        <a href="mailto:jimscraftycreations@hotmail.com" class="contact-item"><i class="fas fa-envelope contact-icon"></i><h3>Email</h3><p>jimscraftycreations@hotmail.com</p></a>
+    </div>
+  </section>
+
+  <footer>© 2026 Jimmy’s Craft Creations • DEVELOPED BY SEDIBA TECH SOLUTIONS</footer>
+</div>
+
+<div id="service-detail-view">
+  <div class="detail-container">
+    <img id="view-img" class="detail-img" src="">
+    <div class="detail-content">
+      <span onclick="showMain()" style="cursor:pointer; font-weight:700; color:#0072ff;">← Back</span>
+      <h1 id="view-title"></h1>
+      <p id="view-desc"></p>
+      <button class="btn" onclick="goToContact()">Request Quote</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openService(t, i, d) { 
+    document.getElementById('main-site').style.display = 'none'; 
+    document.getElementById('service-detail-view').style.display = 'block'; 
+    document.getElementById('view-title').innerText = t; 
+    document.getElementById('view-img').src = i; 
+    document.getElementById('view-desc').innerText = d; 
+    window.scrollTo(0,0); 
+  }
+
+  function showMain() { 
+    document.getElementById('main-site').style.display = 'block'; 
+    document.getElementById('service-detail-view').style.display = 'none'; 
+  }
+
+  function goToContact() {
+    showMain();
+    setTimeout(() => {
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+
+  let sIdx = 0; 
+  const slides = document.querySelectorAll('.slide');
+  function runSlides() { 
+    slides.forEach(s => s.classList.remove('active')); 
+    sIdx = (sIdx + 1) % slides.length; 
+    slides[sIdx].classList.add('active'); 
+    setTimeout(runSlides, 5000); 
+  }
+  runSlides();
+</script>
+</body>
+</html>
